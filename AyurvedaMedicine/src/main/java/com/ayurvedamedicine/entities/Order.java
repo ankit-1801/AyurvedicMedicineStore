@@ -19,8 +19,8 @@ public class Order {
     
     private int userId;
     
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Medicine> medicineList;
+    @OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+    private List<OrderItem> medicineList;
 
     private String address;
 
@@ -57,11 +57,11 @@ public class Order {
         this.totalCost = totalCost;
     }
 
-    public List<Medicine> getMedicineList() {
+    public List<OrderItem> getMedicineList() {
         return medicineList;
     }
 
-    public void setMedicineList(List<Medicine> medicineList) {
+    public void setMedicineList(List<OrderItem> medicineList) {
         this.medicineList = medicineList;
     }
 

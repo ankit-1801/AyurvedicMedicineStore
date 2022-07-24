@@ -1,8 +1,10 @@
 package com.ayurvedamedicine.serviceImpl;
 
+import com.ayurvedamedicine.entities.Medicine;
 import com.ayurvedamedicine.entities.Order;
-import com.ayurvedamedicine.exception.MedicineNotFoundException;
+import com.ayurvedamedicine.entities.OrderItem;
 import com.ayurvedamedicine.exception.OrderNotFoundException;
+import com.ayurvedamedicine.repository.IMedicineRepository;
 import com.ayurvedamedicine.repository.IOrderRepository;
 import com.ayurvedamedicine.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +17,24 @@ import java.util.List;
 public class OrderService implements IOrderService {
     @Autowired
     private IOrderRepository iOrderRepository;
-
+    
+    @Autowired
+    private IMedicineRepository iMedicineRepository;
 
     @Override
     public String add(Order order) {
+    	
         order.setOrderDate(LocalDate.now());
+        order.setDispatchDate(LocalDate.now());
+        float cost = 0;
+        for(OrderItem item : order.getMedicineList()) {
+        	Medicine med = iMedicineRepository.findById(item.getMedicineId()).orElseThrow(()->new OrderNotFoundException("Medcine not found"));;
+            cost+=med.getMedicineCost();
+        }
+        
+        order.setTotalCost(cost);
         iOrderRepository.save(order);
-        return "order added successfully";
+        return "Order created!!";
     }
 
     @Override
@@ -73,5 +86,12 @@ public class OrderService implements IOrderService {
 	public List<Order> getOrderByUserId(int customerId) {
 		List <Order> orderList=iOrderRepository.findByUserId(customerId);
         return orderList;
+	}
+
+	@Override
+	public List<OrderItem> getMediListById(Integer ordId) {
+		// TODO Auto-generated method stub
+		Order order=iOrderRepository.findById(ordId).orElseThrow(()->new OrderNotFoundException("order with id ="+ordId+"is not found"));
+		return order.getMedicineList();
 	}
 }

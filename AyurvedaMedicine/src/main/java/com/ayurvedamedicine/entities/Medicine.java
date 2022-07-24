@@ -15,12 +15,12 @@ public class Medicine {
     private LocalDate mfd;
     private LocalDate expiryDate;
 	private String companyName;
+	private String category;
 
 //    private Integer quantity;
 //    private String info;
 //    private String image;
 //    @OneToOne(cascade = CascadeType.ALL)
-    String category;
 
     public Integer getMedicineId() {
         return medicineId;
