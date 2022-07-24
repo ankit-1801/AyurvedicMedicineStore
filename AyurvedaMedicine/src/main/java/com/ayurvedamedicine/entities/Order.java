@@ -19,8 +19,7 @@ public class Order {
     
     private int userId;
     
-    @OneToMany(cascade = CascadeType.ALL )
-    @JoinColumn(name = "order_id",referencedColumnName = "orderId",nullable = false)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Medicine> medicineList;
 
     private String address;

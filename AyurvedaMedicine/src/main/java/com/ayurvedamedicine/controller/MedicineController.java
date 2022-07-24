@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
-
+@CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/medi")
 public class MedicineController {
@@ -35,6 +35,7 @@ public class MedicineController {
     }
 
     @GetMapping("/readAll")
+    
     public List<Medicine> readAllMed(){
         return iMedicineService.readAll();
     }

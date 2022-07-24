@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 //import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.List;
-
+@CrossOrigin("*")
 @RestController
 @RequestMapping
 public class OrderController {
