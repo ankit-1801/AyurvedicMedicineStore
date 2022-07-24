@@ -14,6 +14,7 @@ import javax.persistence.Table;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+	
 	private Integer medicineId;
 
 	public Integer getMedicineId() {

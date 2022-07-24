@@ -22,9 +22,9 @@ public class UserController {
     public ResponseEntity<User> createUser(@RequestBody User u) throws IOException {// changes
         return new ResponseEntity<>(iUserService.add(u), HttpStatus.OK);
     }
-    @GetMapping("/signIn")
+    @PostMapping("/signIn")
     public ResponseEntity<User> signIn(@RequestBody User u) throws IOException {// changes
-    	return new ResponseEntity<>(iUserService.signIn(u), HttpStatus.OK);
+    	return new ResponseEntity<>(iUserService.signIn(u), HttpStatus.CREATED);
     }
     @GetMapping("/readAll")
     public List<User> fetchingUser()
